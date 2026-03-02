@@ -1,24 +1,23 @@
 import java.util.Scanner;
+import java.util.Queue;
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
  * ==================================================
- * MAIN CLASS - UseCase5PalindromeCheckerApp
+ * MAIN CLASS - UseCase6PalindromeCheckerApp
  * ==================================================
  *
- * UC5: Stack-Based Palindrome Checker
+ * UC6: Queue + Stack Based Palindrome Check
  *
  * Goal:
- * Use a stack to reverse characters and validate palindrome.
+ * Demonstrate FIFO vs LIFO using Queue and Stack.
  *
- * Data Structure: Stack
+ * Data Structures: Queue, Stack
  */
 
 public class PalindromeCheckerApp {
 
-    /**
-     * Application entry point for UC5.
-     */
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -27,18 +26,21 @@ public class PalindromeCheckerApp {
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
+        Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
 
-        // Push characters into stack
+        // Enqueue characters into queue and push into stack
         for (int i = 0; i < input.length(); i++) {
-            stack.push(input.charAt(i));
+            char ch = input.charAt(i);
+            queue.add(ch);  // FIFO
+            stack.push(ch); // LIFO
         }
 
         boolean isPalindrome = true;
 
-        // Pop characters and compare with original string
-        for (int i = 0; i < input.length(); i++) {
-            if (input.charAt(i) != stack.pop()) {
+        // Compare dequeue vs pop
+        while (!queue.isEmpty()) {
+            if (!queue.remove().equals(stack.pop())) {
                 isPalindrome = false;
                 break;
             }
