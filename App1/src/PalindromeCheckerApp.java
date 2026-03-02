@@ -1,31 +1,42 @@
+import java.util.Scanner;
+
 /**
- * ============================================================
- * MAIN CLASS - UseCase1PalindromeApp
- * ============================================================
- *
- * Use Case 1: Application Entry & Welcome Message
- *
- * Description:
- * This class represents the entry point of the
- * Palindrome Checker Management System.
- *
- * At this stage, the application:
- * - Starts execution from the main() method
- * - Displays a welcome message
- * - Shows application version
- *
- * No palindrome logic is implemented yet.
- *
- * The goal is to establish a clear startup flow.
- *
- * @author vishal
- * @version 1.0
+ * ==================================================
+ * MAIN CLASS - UseCase2PalindromeCheckerApp
+ * ==================================================
+ * This class demonstrates palindrome validation
+ * using user input.
  */
+
 public class PalindromeCheckerApp {
-    static void main() {
-        System.out.println("Version: 1.0");
-        System.out.println();
-        System.out.println("Welcome to the application!");
-        System.out.println("System is starting successfully...");
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        // Take input from user
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+
+        boolean isPalindrome = true;
+
+        // Loop only till half of the string length
+        for (int i = 0; i < input.length() / 2; i++) {
+
+            // Compare characters from start and end
+            if (input.charAt(i) != input.charAt(input.length() - 1 - i)) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        // Display result
+        if (isPalindrome) {
+            System.out.println(input + " is a palindrome.");
+        } else {
+            System.out.println(input + " is not a palindrome.");
+        }
+
+        scanner.close();
     }
 }
